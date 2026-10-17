@@ -1,0 +1,6 @@
+{% extends 'base.html' %}{% block title %}Weekly report{% endblock %}{% block body %}<h1>Weekly report · week of {{ r.week }}</h1><p><a href="?week={{ prev }}">← previous week</a></p>
+<div class="kpis"><div><span>Enquiries</span><b>{{ r.enquiries }}</b></div><div><span>Median first reply</span><b>{{ r.median_reply_h if r.median_reply_h is not none else '–' }} h</b></div>
+<div><span>Replied within 1 h</span><b>{{ r.within_1h if r.within_1h is not none else '–' }}%</b></div><div><span>Open over 24 h</span><b>{{ r.open_over_24h }}</b></div>
+<div><span>Bookings</span><b>{{ r.bookings }}</b></div><div><span>Revenue (incl. GST)</span><b>{{ money(r.revenue_cents) }}</b></div></div>
+<div class="grid2"><section class="card"><h2>Enquiries by channel</h2><table>{% for k,v in r.by_source.items() %}<tr><td>{{ k }}</td><td>{{ v }}</td></tr>{% endfor %}</table></section>
+<section class="card"><h2>Bookings by source</h2><table>{% for k,v in r.bookings_by_source.items() %}<tr><td>{{ k }}</td><td>{{ v }}</td></tr>{% endfor %}</table></section></div>{% endblock %}

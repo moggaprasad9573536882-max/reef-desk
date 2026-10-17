@@ -1,0 +1,9 @@
+{% extends 'base.html' %}{% block title %}Departures{% endblock %}{% block body %}<h1>Departures · next 14 days</h1>
+{% if g.user.role != 'guide' %}<section class="card"><h2>New booking</h2><form method="post" class="inline"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<select name="departure_id" required>{% for d in rows if d.status=='scheduled' %}<option value="{{ d.id }}">{{ d.date }} · {{ d.tour_name }} ({{ d.capacity - d.booked }} left)</option>{% endfor %}</select>
+<input name="name" placeholder="Guest name" required><input name="email" type="email" placeholder="Email" required><input name="phone" placeholder="Phone">
+<input name="adults" type="number" min="0" max="12" value="2" aria-label="Adults"><input name="children" type="number" min="0" max="12" value="0" aria-label="Children">
+<select name="source"><option>phone</option><option>website</option><option>email</option><option>facebook</option><option>walk-in</option></select><button>Book</button></form></section>{% endif %}
+<table><tr><th>Date</th><th>Tour</th><th>Seats</th><th></th><th></th></tr>{% for d in rows %}<tr class="{{ 'cancelled' if d.status!='scheduled' }}"><td>{{ d.date }}</td><td>{{ d.tour_name }}</td>
+<td><div class="bar"><span style="width:{{ (100 * d.booked / d.capacity)|round|int }}%"></span></div>{{ d.booked }}/{{ d.capacity }}</td>
+<td>{% if d.status!='scheduled' %}<span class="pill red">weather cancelled</span>{% endif %}</td><td><a href="{{ url_for('main.manifest', did=d.id) }}">Manifest</a></td></tr>{% endfor %}</table>{% endblock %}

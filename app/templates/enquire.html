@@ -1,0 +1,10 @@
+{% extends 'base.html' %}{% block title %}Enquiry{% endblock %}{% block body %}<section class="card narrow"><h1>{% if g.user %}Log an enquiry{% else %}Ask us anything{% endif %}</h1>
+<p class="muted">We reply within 1 hour in office hours (8 am to 6 pm, Cairns time).</p>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input class="hp" name="website_url" tabindex="-1" autocomplete="off" aria-hidden="true">
+{% if g.user %}<label>Channel<select name="source"><option>phone</option><option>facebook</option><option>email</option><option>website</option></select></label>{% endif %}
+<label>Name<input name="name" value="{{ form.get('name','') }}" maxlength="80" required></label>
+<label>Email<input name="email" type="email" value="{{ form.get('email','') }}"></label><label>Phone<input name="phone" value="{{ form.get('phone','') }}"></label>
+<label>Message<textarea name="message" rows="5" maxlength="2000" required>{{ form.get('message','') }}</textarea></label>
+{% if not g.user %}<label class="check"><input type="checkbox" name="consent" value="1"> I agree Reef &amp; Ranges may store this enquiry to reply to me. Please don't include medical details here; we'll discuss those by phone.</label>
+<label class="check"><input type="checkbox" name="marketing" value="1"> Send me occasional offers (you can unsubscribe any time)</label>{% endif %}
+<button>Send enquiry</button></form></section>{% endblock %}

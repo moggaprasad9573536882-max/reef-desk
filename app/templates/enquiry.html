@@ -1,0 +1,12 @@
+{% extends 'base.html' %}{% block title %}ENQ-{{ e.id }}{% endblock %}{% block body %}<h1>ENQ-{{ e.id }} · {{ e.name }}</h1>
+<div class="grid2"><section class="card"><h2>Message ({{ e.source }}, {{ fmt(e.received_at) }})</h2><p class="quote">{{ e.message }}</p>
+<p class="muted">Promised reply by {{ fmt(e.reply_by) }} · {{ e.email or '' }} {{ e.phone or '' }}</p>
+<h2>Triage</h2><ul class="facts"><li>Status: <b>{{ e.status }}</b></li><li>Drafted by: <b>{{ e.drafted_by }}</b></li><li>Intent: {{ e.intent or '–' }}</li>
+<li>Tour: {{ tour.name if tour else '–' }}</li><li>Date: {{ e.requested_date or '–' }} · Guests: {{ e.guests or '–' }}</li><li>Confidence: {{ '%.2f'|format(e.confidence) if e.confidence is not none else '–' }}</li></ul>
+{% if reasons %}<div class="flash error"><b>Why a person must handle this:</b><ul>{% for r in reasons %}<li>{{ r }}</li>{% endfor %}</ul></div>{% endif %}
+{% for m in sent %}<div class="sent"><b>{{ m.kind }}</b> to {{ m.to_addr }} by {{ m.sent_by }} · {{ fmt(m.created_at) }}<pre>{{ m.body }}</pre></div>{% endfor %}</section>
+<section class="card"><h2>Reply</h2><p class="muted">AI drafts, you decide. Nothing is sent until you press Send.</p>
+{% if warnings %}<div class="flash error"><b>Checks failed:</b><ul>{% for w in warnings %}<li>{{ w }}</li>{% endfor %}</ul></div>{% endif %}
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><textarea name="reply" rows="12">{{ draft }}</textarea>
+{% if warnings %}<label class="check"><input type="checkbox" name="override" value="yes"> I've checked these points and want to send anyway</label>{% endif %}
+<div class="row"><button name="action" value="send">Send reply</button><button name="action" value="close" class="ghost">Close (no reply needed)</button></div></form></section></div>{% endblock %}

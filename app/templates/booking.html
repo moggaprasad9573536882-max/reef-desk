@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% block title %}{{ b.ref }}{% endblock %}{% block body %}<div class="grid2"><section class="card invoice"><h1>Tax invoice {{ b.ref }}</h1>
+<p>{{ biz.legal_name }}<br>ABN {{ biz.abn }}<br>{{ biz.address }}</p><p>Issued {{ fmt(b.created_at) }} to {{ b.customer_name }} ({{ b.email }})</p>
+<table><tr><th>Item</th><th>Qty</th><th>Price</th><th>Total</th></tr><tr><td>{{ b.tour_name }}, {{ b.date }}: adult</td><td>{{ b.adults }}</td><td>{{ money(b.adult_cents) }}</td><td>{{ money(b.adults*b.adult_cents) }}</td></tr>
+{% if b.children %}<tr><td>{{ b.tour_name }}, {{ b.date }}: child</td><td>{{ b.children }}</td><td>{{ money(b.child_cents) }}</td><td>{{ money(b.children*b.child_cents) }}</td></tr>{% endif %}
+<tr><th colspan="3">Total (GST inclusive)</th><th>{{ money(b.total_cents) }}</th></tr><tr><td colspan="3">GST included</td><td>{{ money(gst) }}</td></tr></table>
+<p class="muted">Pay securely: https://pay.reefandranges.example/{{ b.ref }} (placeholder)</p></section>
+<section class="card"><h2>Confirmation (template, reviewed before sending)</h2><pre>Hi {{ b.customer_name.split()[0] }},
+
+You're booked on the {{ b.tour_name }} on {{ b.date }} for {{ b.adults }} adult(s){% if b.children %} and {{ b.children }} child(ren){% endif %}.
+{{ tour.pickup }}
+Please bring {{ tour.what_to_bring|join(', ') }}.
+
+Booking reference: {{ b.ref }}
+The Reef &amp; Ranges team</pre></section></div>{% endblock %}

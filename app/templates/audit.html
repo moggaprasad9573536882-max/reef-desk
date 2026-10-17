@@ -1,0 +1,2 @@
+{% extends 'base.html' %}{% block title %}Audit log{% endblock %}{% block body %}<h1>Audit log</h1><table><tr><th>When</th><th>Who</th><th>Action</th><th>What</th><th>Detail</th></tr>
+{% for a in rows %}<tr><td>{{ fmt(a.at) }}</td><td>{{ a.actor }}</td><td>{{ a.action }}</td><td>{{ a.entity }}</td><td class="msg">{{ a.detail or '' }}</td></tr>{% endfor %}</table>{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block title %}Enquiries{% endblock %}{% block body %}<h1>Enquiries</h1>
+<div class="tabs">{% for t, label in [('open','Open'),('replied','Replied'),('all','All')] %}<a class="{{ 'on' if tab==t }}" href="?tab={{ t }}">{{ label }}</a>{% endfor %}</div>
+<table><tr><th>Ref</th><th>Waiting</th><th>Channel</th><th>From</th><th>Message</th><th>Status</th></tr>
+{% for r in rows %}<tr class="{{ 'late' if r.status in ('needs_human','draft_ready') and overdue(r) }}"><td><a href="{{ url_for('main.enquiry', eid=r.id) }}">ENQ-{{ r.id }}</a></td>
+<td>{{ age(r.received_at) }}{% if r.status in ('needs_human','draft_ready') and overdue(r) %} <span class="pill red">overdue</span>{% endif %}</td><td>{{ r.source }}</td><td>{{ r.name }}</td>
+<td class="msg">{{ r.message[:90] }}</td><td>{% if r.status=='needs_human' %}<span class="pill amber">needs a person</span>{% elif r.status=='draft_ready' %}<span class="pill teal">draft ready</span>{% else %}<span class="pill grey">{{ r.status }}</span>{% endif %}</td></tr>
+{% else %}<tr><td colspan="6" class="muted">Nothing here.</td></tr>{% endfor %}</table>{% endblock %}
