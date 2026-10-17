@@ -18,6 +18,7 @@
 - The first promo-video render came out at 27.9 s, under the 30–45 s rule. Caught on the length check and fixed by adding pauses between lines.
 - In earlier drafts of the audit, Claude's layout overflowed the 2-page limit three times. Each was caught by rendering and checking page height, then fixed by cutting text.
 - A design risk I made it guard against: a generic phone-number regex would also delete dates like 2026-11-02 from enquiries. The redaction now needs 9+ digits, and a test proves dates survive.
+- The audit log marked unedited AI drafts as "edited by a person". Browsers send form text with Windows line endings (CRLF), so the comparison always failed. Found while recording the walkthrough video, and fixed by normalising line endings.
 - Generative AI can state wrong prices or promise bookings. So the app doesn't trust the model: `check_draft()` rejects unknown prices, times and links, and any promise. This is tested.
 
 ## What I reviewed or changed myself

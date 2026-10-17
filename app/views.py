@@ -169,7 +169,7 @@ def enquiry(eid):
             conn.execute("UPDATE enquiries SET status='closed' WHERE id=?", (eid,))
             audit(conn, g.user["username"], "enquiry_closed", f"ENQ-{eid}")
             return redirect(url_for("main.inbox"))
-        text = request.form.get("reply", "").strip()
+        text = request.form.get("reply", "").replace("\r\n", "\n").strip()   # browsers send CRLF line endings
         warnings = triage.check_draft(text, kb()) if text else ["reply is empty"]
         if text and (not warnings or request.form.get("override") == "yes"):
             with transaction(conn):
@@ -178,7 +178,7 @@ def enquiry(eid):
                 conn.execute("UPDATE enquiries SET status='replied', first_reply_at=COALESCE(first_reply_at, ?), assigned_to=? WHERE id=?",
                              (iso(utcnow()), g.user["username"], eid))
                 audit(conn, g.user["username"], "reply_sent", f"ENQ-{eid}",
-                      {"edited_by_person": text != (e["ai_draft"] or ""), "override": bool(warnings)})
+                      {"edited_by_person": text != (e["ai_draft"] or "").strip(), "override": bool(warnings)})
             flash("Reply sent (prototype: stored in the outbox, not emailed).", "ok")
             return redirect(url_for("main.inbox"))
     sent = conn.execute("SELECT * FROM outbox WHERE enquiry_id=? ORDER BY id", (eid,)).fetchall()
