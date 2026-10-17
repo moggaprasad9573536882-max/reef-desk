@@ -1,0 +1,64 @@
+{
+  "_note": "Approved knowledge base. The AI may only use facts from this file. Owner sign-off required for changes. All details are fictional.",
+  "business": {
+    "name": "Reef & Ranges Tours",
+    "legal_name": "Reef & Ranges Tours Pty Ltd (fictional)",
+    "abn": "00 000 000 000 (fictional)",
+    "phone": "07 4000 0000",
+    "email": "hello@reefandranges.example",
+    "website": "https://reefandranges.example",
+    "office_hours": "8:00 am to 6:00 pm, 7 days (Cairns time)",
+    "address": "Shop 1, 1 Esplanade, Cairns QLD 4870 (fictional)"
+  },
+  "tours": [
+    {
+      "code": "REEF",
+      "name": "Outer Reef Snorkel Day",
+      "keywords": ["reef", "snorkel", "snorkelling", "snorkeling", "dive", "diving", "great barrier", "outer reef", "boat", "coral"],
+      "adult_price": 269,
+      "child_price": 169,
+      "duration": "8 hours",
+      "pickup": "Hotel pickup from Cairns city between 6:45 am and 7:15 am. Your exact time is confirmed the day before.",
+      "check_in": "Self-drive guests check in at Marlin Marina by 7:30 am.",
+      "returns": "Back in Cairns around 5:00 pm.",
+      "capacity": 40,
+      "included": ["lunch", "snorkel gear", "stinger suit", "reef tax"],
+      "what_to_bring": ["swimwear and a towel", "reef-safe sunscreen", "a hat and sunglasses", "motion-sickness tablets if you need them"]
+    },
+    {
+      "code": "RAIN",
+      "name": "Daintree Rainforest & Cape Tribulation",
+      "keywords": ["daintree", "rainforest", "cape trib", "cape tribulation", "mossman", "crocodile", "croc", "river cruise"],
+      "adult_price": 219,
+      "child_price": 139,
+      "duration": "11 hours",
+      "pickup": "Hotel pickup from Cairns city between 7:00 am and 7:30 am. Your exact time is confirmed the day before.",
+      "check_in": "No self-drive option for this tour.",
+      "returns": "Back in Cairns around 6:00 pm.",
+      "capacity": 22,
+      "included": ["lunch", "river cruise", "national park fees"],
+      "what_to_bring": ["comfortable walking shoes", "insect repellent", "a light rain jacket", "a water bottle"]
+    },
+    {
+      "code": "TABLE",
+      "name": "Atherton Tablelands Waterfalls",
+      "keywords": ["tablelands", "atherton", "waterfall", "waterfalls", "millaa millaa", "kuranda", "lakes"],
+      "adult_price": 179,
+      "child_price": 109,
+      "duration": "9 hours",
+      "pickup": "Hotel pickup from Cairns city between 7:45 am and 8:15 am. Your exact time is confirmed the day before.",
+      "check_in": "No self-drive option for this tour.",
+      "returns": "Back in Cairns around 5:00 pm.",
+      "capacity": 22,
+      "included": ["morning tea", "lunch", "swim stops"],
+      "what_to_bring": ["swimwear and a towel", "comfortable shoes", "sunscreen and a hat", "a water bottle"]
+    }
+  ],
+  "policies": {
+    "children": "Children aged 4 to 14 pay the child price. For children under 4, please call us so we can check the tour is suitable.",
+    "weather": "Our skipper decides on weather and sea conditions by 6:00 pm the day before. If we cancel, you choose a full refund or a free change of date.",
+    "cancellation": "You can cancel free of charge up to 48 hours before departure. Inside 48 hours, please call us and a team member will help.",
+    "stingers": "Stinger suits are supplied free on reef tours. Stinger season is roughly November to May.",
+    "payment": "We send a secure payment link with your booking confirmation. We never ask for card details by email or phone."
+  }
+}
