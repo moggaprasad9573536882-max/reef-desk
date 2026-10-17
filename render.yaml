@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: reef-desk
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && flask --app app init-db --demo
+    startCommand: gunicorn -w 2 -b 0.0.0.0:$PORT "app:create_app()"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SESSION_COOKIE_SECURE
+        value: "1"
+      - key: REEF_DEMO_PASSWORD
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
