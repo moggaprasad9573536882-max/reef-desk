@@ -12,5 +12,4 @@ services:
         value: "1"
       - key: REEF_DEMO_PASSWORD
         sync: false
-      - key: GEMINI_API_KEY
-        sync: false
+      # Optional: add GEMINI_API_KEY in the Render dashboard to switch on real AI drafting.
